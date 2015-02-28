@@ -2,11 +2,6 @@
 // modify it: replace 'f-rjng24!1r5TRHHgnjrt' by some random characters
 define('SEED', 'f-rjng24!1r5TRHHgnjrt');
 
-define('DEFAULT_NB_MINUTES_TO_LIVE', 30);
-
-// maximum lifetime for a chat room (0 = unlimited)
-define('NB_MINUTES_TO_LIVE_MAX', 0);
-
 // number of messages to keep
 define('NB_MESSAGES_TO_KEEP', 100);
 
@@ -19,4 +14,16 @@ define('DB_FILE_NAME', 'db/chatrooms.sqlite');
 define('LOGS_FILE_NAME', 'db/logs.txt');
 
 define('MYCRYPTOCHAT_VERSION', 'v1.0.4');
+
+$allowedTimes = array(
+    5 => '5 minutes',
+    30 => '30 minutes',
+    60 => '1 hour',
+    240 => '4 hours',
+    1440 => '1 day',
+    10080 => '7 days',
+    40320 => '30 days',
+    525960 => '1 year',
+    0 => 'Unlimited'
+);
 ?>

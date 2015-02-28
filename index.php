@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-    require 'inc/constants.php';
+    require 'inc/conf.php';
     $showContent = true;
     if(!is_writable(DB_FILE_NAME)) {
         $showContent = false;
@@ -110,27 +110,9 @@
             <form method="POST" action="newroom.php">
                 <label for="nbMinutesToLive">Lifetime of the chat room:</label>
                 <select id="nbMinutesToLive" name="nbMinutesToLive">
-					<?php if(NB_MINUTES_TO_LIVE_MAX == 0) { ?>
-						<option value="0">Unlimited</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 5) { ?>
-						<option value="5">5 minutes</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 60) { ?>
-						<option value="60">1 hour</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 1440) { ?>
-						<option value="1440">1 day</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 10080) { ?>
-						<option value="10080">7 days</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 40320) { ?>
-						<option value="40320">30 days</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 525960) { ?>
-						<option value="525960">1 year</option>
-					<?php } ?>
+                    <?php foreach ($allowedTimes as $minutes => $label) { ?>
+                        <option value="<?php echo $minutes; ?>"><?php echo $label; ?></option>
+                    <?php } ?>
                 </select><br />
                 <br />
 				
@@ -139,7 +121,7 @@
 				<br />
 				<div id="divRemovePassword">
 					<br /><label for="removePassword">Password to remove:</label>
-					<input type="text" name="removePassword" value="" />
+					<input type="password" name="removePassword" value="" />
 				</div>
 				<br />
 				

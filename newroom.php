@@ -1,16 +1,14 @@
 <?php
-require 'inc/constants.php';
+require 'inc/conf.php';
 require 'inc/init.php';
 require 'inc/functions.php';
 require 'inc/classes.php';
 require 'inc/dbmanager.php';
 
-if($_POST['nbMinutesToLive'] < 0) {
-    $nbMinutesToLive = DEFAULT_NB_MINUTES_TO_LIVE;
-} else if (NB_MINUTES_TO_LIVE_MAX > 0 && $_POST['nbMinutesToLive'] > NB_MINUTES_TO_LIVE_MAX) {
-    $nbMinutesToLive = NB_MINUTES_TO_LIVE_MAX;
-} else {
+if(array_key_exists($_POST['nbMinutesToLive'], $allowedTimes)) {
     $nbMinutesToLive = $_POST['nbMinutesToLive'];
+} else {
+    exit('cheater');
 }
 
 $time = $_SERVER['REQUEST_TIME'];
