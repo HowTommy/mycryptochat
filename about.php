@@ -49,7 +49,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; 2013 - MyCryptoChat <?php require 'inc/conf.php'; echo MYCRYPTOCHAT_VERSION; ?> by HowTommy.net</p>
+                    <p>&copy; 2013 - MyCryptoChat <?php require 'inc/constants.php'; echo MYCRYPTOCHAT_VERSION; ?> by HowTommy.net</p>
                 </div>
             </div>
         </footer>

@@ -1,5 +1,5 @@
 <?php
-require 'inc/conf.php';
+require 'inc/constants.php';
 require 'inc/functions.php';
 ?><!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,20 @@ require 'inc/functions.php';
 <body>
     <?php
     $showContent = true;
+    $configIncluded = false;
+    if(is_readable(CONFIG_FILE_NAME)) {
+        include CONFIG_FILE_NAME;
+        $configIncluded = true;
+    } else {
+        $showContent = false;
+        ?>
+        <h2>Error: missing inc/conf.php</h2>
+        <p>
+            MyCryptoChat can't read the configuration file.<br />
+            Copy <strong>inc/config.template.php</strong> into <strong>inc/config.php</strong>, and don't forget to <strong>customize it</strong>.
+        </p>
+    <?php
+    }
     if(!is_writable(DB_FILE_NAME)) {
         $showContent = false;
     ?>
@@ -64,7 +78,7 @@ require 'inc/functions.php';
     </p>
     <?php
     }
-    if(SEED == 'f-rjng24!1r5TRHHgnjrt') {
+    if($configIncluded === true && SEED == 'f-rjng24!1r5TRHHgnjrt') {
         $showContent = false;
     ?>
     <h2>Error: the seed was not modified</h2>

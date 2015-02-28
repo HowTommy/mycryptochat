@@ -10,11 +10,6 @@ define('DAYS_TO_DELETE_IDLE_CHATROOM', 60);
 
 define('NB_SECONDS_USER_TO_BE_DISCONNECTED', 35);
 
-define('DB_FILE_NAME', 'db/chatrooms.sqlite');
-define('LOGS_FILE_NAME', 'db/logs.txt');
-
-define('MYCRYPTOCHAT_VERSION', 'v1.0.4');
-
 $allowedTimes = array(
     5 => '5 minutes',
     30 => '30 minutes',
