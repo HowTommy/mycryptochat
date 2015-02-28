@@ -21,16 +21,10 @@ $removePassword = $_POST['removePassword'];
 $userHash = getHashForIp();
 
 // we generate a random key
-$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$key = '';
-for ($i = 0; $i < 20; $i++) {
-    $key .= $characters[rand(0, strlen($characters) - 1)];
-}
-// we add the seed, hash the whole key and only take the 20 first characters
-$key = substr(md5($key . SEED), 0, 20);
+$key = randomString(20);
 
 // we create the chat room object
-$chatRoom = new ChatRoom;
+$chatRoom = new ChatRoom();
 $chatRoom->id = $key;
 $chatRoom->dateCreation = $time;
 $chatRoom->dateLastNewMessage = $time;
@@ -53,4 +47,3 @@ $dbManager->CleanChatrooms($time);
 $dbManager->CreateChatroom($chatRoom);
 
 header('Location: chatroom.php?id=' . $key);
-?>

@@ -26,4 +26,3 @@ $allowedTimes = array(
     525960 => '1 year',
     0 => 'Unlimited'
 );
-?>

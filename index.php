@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+require 'inc/conf.php';
+require 'inc/functions.php';
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,7 +13,6 @@
 </head>
 <body>
     <?php
-    require 'inc/conf.php';
     $showContent = true;
     if(!is_writable(DB_FILE_NAME)) {
         $showContent = false;
@@ -68,7 +70,8 @@
     <h2>Error: the seed was not modified</h2>
     <p>
         The seed that is used to do a better hashing for users is still 'f-rjng24!1r5TRHHgnjrt'<br />
-        Please modify its value in 'inc/constants.php'.
+        Please modify its value in 'inc/conf.php'.<br />
+        You could may be use '<?php echo randomString(20); ?>', or another.
     </p>
     <?php
     }
