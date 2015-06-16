@@ -10,7 +10,7 @@ require 'inc/functions.php';
     <meta name="viewport" content="width=device-width" />
     <link href="styles/myCryptoChat.css" rel="stylesheet" />
     <script src="scripts/modernizr.js"></script>
-</head>
+</head>c
 <body>
     <?php
     $showContent = true;
@@ -24,7 +24,7 @@ require 'inc/functions.php';
         <h2>Error: missing inc/conf.php</h2>
         <p>
             MyCryptoChat can't read the configuration file.<br />
-            Copy <strong>inc/config.template.php</strong> into <strong>inc/config.php</strong>, and don't forget to <strong>customize it</strong>.
+            Copy <strong>inc/conf.template.php</strong> into <strong>inc/conf.php</strong>, and don't forget to <strong>customize it</strong>.
         </p>
     <?php
     }
