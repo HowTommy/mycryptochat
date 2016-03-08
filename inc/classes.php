@@ -17,4 +17,3 @@
 		public $userId;
 		public $date;
 	}
-?>

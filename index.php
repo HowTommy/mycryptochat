@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+require 'inc/constants.php';
+require 'inc/functions.php';
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,8 +13,21 @@
 </head>
 <body>
     <?php
-    require 'inc/constants.php';
     $showContent = true;
+    $configIncluded = false;
+    if(is_readable(CONFIG_FILE_NAME)) {
+        include CONFIG_FILE_NAME;
+        $configIncluded = true;
+    } else {
+        $showContent = false;
+        ?>
+        <h2>Error: missing inc/conf.php</h2>
+        <p>
+            MyCryptoChat can't read the configuration file.<br />
+            Copy <strong>inc/conf.template.php</strong> into <strong>inc/conf.php</strong>, and don't forget to <strong>customize it</strong>.
+        </p>
+    <?php
+    }
     if(!is_writable(DB_FILE_NAME)) {
         $showContent = false;
     ?>
@@ -62,13 +78,14 @@
     </p>
     <?php
     }
-    if(SEED == 'f-rjng24!1r5TRHHgnjrt') {
+    if($configIncluded === true && SEED == 'f-rjng24!1r5TRHHgnjrt') {
         $showContent = false;
     ?>
     <h2>Error: the seed was not modified</h2>
     <p>
         The seed that is used to do a better hashing for users is still 'f-rjng24!1r5TRHHgnjrt'<br />
-        Please modify its value in 'inc/constants.php'.
+        Please modify its value in 'inc/conf.php'.<br />
+        You could may be use '<?php echo randomString(20); ?>', or another.
     </p>
     <?php
     }
@@ -110,27 +127,9 @@
             <form method="POST" action="newroom.php">
                 <label for="nbMinutesToLive">Lifetime of the chat room:</label>
                 <select id="nbMinutesToLive" name="nbMinutesToLive">
-					<?php if(NB_MINUTES_TO_LIVE_MAX == 0) { ?>
-						<option value="0">Unlimited</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 5) { ?>
-						<option value="5">5 minutes</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 60) { ?>
-						<option value="60">1 hour</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 1440) { ?>
-						<option value="1440">1 day</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 10080) { ?>
-						<option value="10080">7 days</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 40320) { ?>
-						<option value="40320">30 days</option>
-					<?php }
-                          if (NB_MINUTES_TO_LIVE_MAX == 0 || NB_MINUTES_TO_LIVE_MAX >= 525960) { ?>
-						<option value="525960">1 year</option>
-					<?php } ?>
+                    <?php foreach ($allowedTimes as $minutes => $label) { ?>
+                        <option value="<?php echo $minutes; ?>"><?php echo $label; ?></option>
+                    <?php } ?>
                 </select><br />
                 <br />
 				
@@ -139,7 +138,7 @@
 				<br />
 				<div id="divRemovePassword">
 					<br /><label for="removePassword">Password to remove:</label>
-					<input type="text" name="removePassword" value="" />
+					<input type="password" name="removePassword" value="" />
 				</div>
 				<br />
 				

@@ -9,16 +9,13 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: "Segoe UI", Verdana, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 a {
     color: #333;
-    outline: none;
-    padding-left: 3px;
-    padding-right: 3px;
     text-decoration: underline;
 }
 
@@ -537,7 +534,7 @@ table {
 th {
     font-size: 1.2em;
     text-align: left;
-    border: none 0px;
+    border: none 0;
     padding-left: 0;
 }
 
@@ -564,7 +561,7 @@ th {
         th.asc a:after, th.desc a:after {
             display: block;
             position: absolute;
-            right: 0em;
+            right: 0;
             top: 0;
             font-size: 0.75em;
         }
@@ -578,7 +575,7 @@ th {
         }
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
+    padding: 0.25em 2em 0.25em 0;
     border: 0 none;
 }
 

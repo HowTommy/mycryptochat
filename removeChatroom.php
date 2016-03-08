@@ -1,4 +1,5 @@
 <?php
+require 'inc/conf.php';
 require 'inc/constants.php';
 require 'inc/init.php';
 require 'inc/functions.php';

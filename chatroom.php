@@ -1,13 +1,14 @@
 <?php
-	require 'inc/constants.php';
-	require 'inc/init.php';
-	require 'inc/functions.php';
-	require 'inc/classes.php';
-	require 'inc/dbmanager.php';
-	
-	$dbManager = new DbManager();
+    require 'inc/constants.php';
+    require 'inc/conf.php';
+    require 'inc/init.php';
+    require 'inc/functions.php';
+    require 'inc/classes.php';
+    require 'inc/dbmanager.php';
 
-	$chatRoom = $dbManager->GetChatroom($_GET['id']);
+    $dbManager = new DbManager();
+
+    $chatRoom = $dbManager->GetChatroom($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

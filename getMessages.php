@@ -1,4 +1,5 @@
-<?php 
+<?php
+require 'inc/conf.php';
 require 'inc/constants.php';
 require 'inc/init.php';
 require 'inc/functions.php';
@@ -11,17 +12,17 @@ $chatRoom = $dbManager->GetChatroom($_POST['roomId']);
 $dateLastNewMessage = $_POST['dateLastGetMessages'];
 $nbIps = $_POST['nbIps'];
 
-if(!is_null($chatRoom)) {        
+if(!is_null($chatRoom)) {
     $userHash = getHashForIp();
     $time = $_SERVER['REQUEST_TIME'];
-    
+
     if($chatRoom->dateEnd != 0 && $chatRoom->dateEnd <= $time) {
         echo 'noRoom';
         exit;
     }
-    
+
     $currentUser = null;
-    
+
     foreach($chatRoom->users as $key => $user) {
         if(!is_null($user)) {
             if($user['id'] == $userHash) {
@@ -32,7 +33,7 @@ if(!is_null($chatRoom)) {
             }
         }
     }
-    
+
     if(is_null($currentUser)) {
         $currentUser = array();
         $currentUser['id'] = $userHash;
@@ -41,13 +42,13 @@ if(!is_null($chatRoom)) {
     } else {
         $currentUser['dateLastSeen'] = $time;
     }
-    
+
     if($chatRoom->noMoreThanOneVisitor && count($chatRoom->users) > 2) {
         $dbManager->DeleteChatroom($_POST['roomId']);
         echo 'destroyed';
         exit;
     }
-    
+
     if($dateLastNewMessage < $chatRoom->dateLastNewMessage) {
         $dbManager->UpdateChatRoomUsers($chatRoom);
         $messages = $dbManager->GetLastMessages($chatRoom->id, NB_MESSAGES_TO_KEEP);
@@ -64,5 +65,5 @@ if(!is_null($chatRoom)) {
         exit;
     }
 }
-echo 'noRoom'; 
+echo 'noRoom';
 ?>
